@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Aux from '../../hoc/Auxilliary';
+import Aux from '../../hoc/Auxilliary/Auxilliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
@@ -35,7 +35,7 @@ class BurgerBuilder extends Component {
             return sum+el;
         }, 0);
         this.setState({purchasable : sum > 0}); 
-        console.log(this.state.purchasable);
+        //console.log(this.state.purchasable);
     }
 
     addIngredientHandler = (type) => {
