@@ -3,18 +3,24 @@ import Modal from '../../components/UI/Modal/Modal';
 import Aux from '../Auxilliary/Auxilliary';
 import axios from '../../axios-orders';
 
-const withErrorHandler = (WrappedComponent) => {
+const withErrorHandler = (WrappedComponent, axios) => {
     return class extends Component{
         state = {
             error : null
         }
-        componentDidMount() {
-            axios.interceptors.request.use(req => {
+        componentWillMount() {
+            this.reqInterceptors = axios.interceptors.request.use(req => {
                 this.setState({ error: null });
-            })
-            axios.interceptors.response.use(null, error => {
+                return req;
+            });
+            this.resInterceptors = axios.interceptors.response.use(res=> res, error => {
                 this.setState({ error: error });
-            })
+            });
+        }
+
+        componentWillUnmount(){
+            axios.interceptors.request.eject(this.reqInterceptors);
+            axios.interceptors.response.eject(this.resInterceptors);
         }
 
         errorConfirmHandler = () =>{
@@ -25,7 +31,7 @@ const withErrorHandler = (WrappedComponent) => {
                 <Aux>
                     <Modal 
                     show={this.state.error}
-                    clicked={this.errorConfirmHandler}>
+                    modalClosed={this.errorConfirmHandler}>
                         {this.state.error ? this.state.error.message : null}
                     </Modal>
                     <WrappedComponent {...this.props} />
