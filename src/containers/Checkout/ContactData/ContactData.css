@@ -7,11 +7,11 @@
     padding: 20px;
 }
 
-.Input{
+/* .Input{
  display: block;   
  margin : 10px auto;
  
-}
+} */
 
 @media(min-width : 600px){
     .ContactData{
