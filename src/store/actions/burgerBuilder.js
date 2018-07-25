@@ -15,16 +15,16 @@ export const removeIngredient = (name) =>{
     }
 }
 
-export const setIngredient = (ingredients) =>{
+export const setIngredients = (ingredients) =>{
     return{
         type: actionTypes.SET_INGREDIENTS,
         ingredients : ingredients
     }
 }
 
-export const fetchIngredientFailed = () =>{
+export const fetchIngredientsFailed = () =>{
     return{
-        type: actionTypes.FETCH_INGREDIENT_FAILED
+        type: actionTypes.FETCH_INGREDIENTS_FAILED
     }
 }
 
@@ -32,10 +32,10 @@ export const initIngredient = () =>{
     return dispatch => {
         axios.get('https://react-my-burger-e4269.firebaseio.com/ingredients.json')
             .then(response => {
-               dispatch(setIngredient(response.data))
+               dispatch(setIngredients(response.data))
             })
             .catch(error => {
-               dispatch(fetchIngredientFailed())
+               dispatch(fetchIngredientsFailed())
             })
     }
 }
