@@ -8,24 +8,18 @@ import axios from '../../axios-orders';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/witherrorHandler';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../store/actions';
+import * as burgerBuilderActions from '../../store/actions/index';
 
 
 class BurgerBuilder extends Component {
     state = {
         purchasing: false,
-        loading: false,
-        error: false
+        ingredients : null,
+        error : false
     };
 
     componentDidMount() {
-        // axios.get('https://react-my-burger-e4269.firebaseio.com/ingredients.json')
-        //     .then(response => {
-        //         this.setState({ ingredients: response.data });
-        //     })
-        //     .catch(error => {
-        //         this.setState({error : true});
-        //     })
+
     }
 
     updatePurchasable(ingredients) {
@@ -80,9 +74,9 @@ class BurgerBuilder extends Component {
                 price={this.props.price}
                 cancelPurchase={this.purchaseCancelHandler}
                 continuePurchase={this.purchaseContinueHandler} />;
-            if (this.state.loading) {
-                ordersummary = <Spinner />;
-            }
+            // if (this.state.loading) {
+            //     ordersummary = <Spinner />;
+            // }
         }
 
         return (
@@ -105,8 +99,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIngredientAdded : (ingName) => dispatch({ type: actionTypes.ADD_INGREDIENT, ingredientName: ingName }),
-        onIngredientRemoved : (ingName) => dispatch({ type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingName })
+        onIngredientAdded : (ingName) => dispatch(burgerBuilderActions.addIngredient(ingName)),
+        onIngredientRemoved : (ingName) => dispatch(burgerBuilderActions.removeIngredient(ingName))
     }
 }
 
