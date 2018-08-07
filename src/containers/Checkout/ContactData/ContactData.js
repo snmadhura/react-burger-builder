@@ -82,12 +82,13 @@ class ContactData extends Component {
             deliveryMethod: {
                 elementType: 'select',
                 elementConfig: {
+                    placeholder: 'Country',
                     options: [
                         { value: 'fastest', displayValue: 'Fastest' },
                         { value: 'cheapest', displayValue: 'Cheapest' }
                     ]
                 },
-                value: '',
+                value: 'fastest',
                 validation: {},
                 valid: true
             }
@@ -120,6 +121,7 @@ class ContactData extends Component {
         if (rules.minLength) {
             isValid = value.length >= rules.minLength && isValid;
         }
+        
         if (rules.maxLength) {
             isValid = value.length <= rules.maxLength && isValid;
         }
@@ -188,9 +190,9 @@ class ContactData extends Component {
 
 const mapStateToProps = state => {
     return {
-        ings: state.ingredients,
-        price: state.totalPrice,
-        loading: state.loading
+        ings: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.totalPrice,
+        loading: state.order.loading
     }
 }
 

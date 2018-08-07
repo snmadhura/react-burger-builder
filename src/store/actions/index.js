@@ -1,7 +1,11 @@
-export { addIngredient, 
+export {
+    addIngredient,
     removeIngredient,
-    initIngredient } 
-    from './burgerBuilder';
+    initIngredient
+} from './burgerBuilder';
 
-export { purchaseBurger } from './order';
+export {
+    purchaseBurger,
+    onPurchaseInit
+} from './order';
 
